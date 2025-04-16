@@ -9,6 +9,10 @@ Please follow all the instructions below to prepare for the workshop. This inclu
 
 ### Code and Data
 Please clone the repo in your local machine to get the code and data required for this project.
+```
+git clone https://github.com/humeranoor/llm-anti-tracking
+cd llm-anti-tracking
+```
 
 ### Trained Model
 - Download the [original pre-trained model](https://drive.google.com/file/d/1FuDfbfiNawnfvTQJ5MZLdzBh5xGt1Bfq/view?usp=drive_link) here and save to the ./original_distilbert folder.
