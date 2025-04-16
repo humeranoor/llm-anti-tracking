@@ -15,9 +15,9 @@ cd llm-anti-tracking
 ```
 
 ### Trained Model
-- Download the [original pre-trained model](https://drive.google.com/file/d/1FuDfbfiNawnfvTQJ5MZLdzBh5xGt1Bfq/view?usp=drive_link) here and save to the ./original_distilbert folder.
+- Download the [original pre-trained model](https://drive.google.com/file/d/1FuDfbfiNawnfvTQJ5MZLdzBh5xGt1Bfq/view?usp=drive_link) and save to the ./original_distilbert folder.
 
-- Download the [final trained model](https://drive.google.com/file/d/1flzzMz2d5JUlrCByjy4bZ20wnpDSiOYw/view?usp=sharing) here and save to the ./final_model folder.
+- Download the [final trained model](https://drive.google.com/file/d/1flzzMz2d5JUlrCByjy4bZ20wnpDSiOYw/view?usp=sharing) and save to the ./final_model folder.
 
 Note: Both the models have the same name, so please ensure the correct order of copying.
 
