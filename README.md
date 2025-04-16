@@ -13,7 +13,6 @@ Please follow all the instructions below to prepare for the workshop. This inclu
 Please clone the repo in your local machine to get the code and data required for this project.
 ```
 git clone https://github.com/humeranoor/llm-anti-tracking
-cd llm-anti-tracking
 ```
 
 ### Trained Model
