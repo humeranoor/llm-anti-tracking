@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 350px;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+    .stats {
+      margin-bottom: 15px;
+    }
+    .current-page {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+    .url-display {
+      font-size: 12px;
+      word-break: break-all;
+      margin-bottom: 5px;
+    }
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .safe {
+      background: #dff0d8;
+      color: #3c763d;
+    }
+    .tracker {
+      background: #f2dede;
+      color: #a94442;
+    }
+    .checking {
+      background: #fcf8e3;
+      color: #8a6d3b;
+    }
+    .error, .unknown {
+      background: #f5f5f5;
+      color: #777;
+    }
+    .trackers-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .tracker-item {
+      font-size: 12px;
+      word-break: break-all;
+      margin-bottom: 8px;
+      padding: 5px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      border-left: 3px solid #a94442;
+    }
+    .tracker-confidence {
+      font-size: 11px;
+      color: #666;
+      margin-top: 3px;
+    }
+    h3 {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    .tab {
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .tab-button {
+      padding: 8px 15px;
+      cursor: pointer;
+      background: #f5f5f5;
+      border: none;
+      outline: none;
+    }
+    .tab-button.active {
+      background: #fff;
+      border-bottom: 2px solid #1a73e8;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .debug-info {
+      margin-top: 20px;
+      padding: 5px;
+      font-size: 10px;
+      color: #999;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <h2>LLM Anti-Tracker</h2>
+  
+  <div class="tab">
+    <button class="tab-button active" data-tab="current">Current Page</button>
+    <button class="tab-button" data-tab="stats">Global Stats</button>
+  </div>
+  
+  <div id="currentTab" class="tab-content active">
+    <div class="current-page">
+      <strong>Current URL:</strong>
+      <div id="currentUrl" class="url-display">Loading...</div>
+      <div>Status: <span id="currentStatus" class="status checking">CHECKING...</span></div>
+    </div>
+    
+    <h3>Trackers on this page:</h3>
+    <div id="trackersList" class="trackers-list">Loading...</div>
+  </div>
+  
+  <div id="statsTab" class="tab-content">
+    <div class="stats">
+      <p>Total URLs checked: <span id="checked">0</span></p>
+      <p>Total trackers blocked: <span id="blocked">0</span></p>
+    </div>
+    <h3>Recently Blocked:</h3>
+    <div class="recent" id="recentList"></div>
+  </div>
+  
+  <div class="debug-info">
+    <p>If status remains "CHECKING..." make sure the API server is running at http://localhost:5000</p>
+    <button id="debugBtn">Debug Connection</button>
+  </div>
+  
+  <!-- Load all JavaScript files as external scripts -->
+  <script src="popup.js"></script>
+  <script src="popup-ui.js"></script>
+</body>
+</html>
