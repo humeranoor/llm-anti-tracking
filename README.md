@@ -2,7 +2,7 @@
 A repo with the code, data and models needed for LLM-based anti-tracking workshop as part of ML Prague 2025. 
 
 ## About
-### Title: Utilizing Large Language Models for improved anti-tracking in web browsers
+### Utilizing Large Language Models for improved anti-tracking in web browsers
 ### Abstract 
 Online tracking remains a significant privacy concern for internet users. Current solutions while effective have limitations in terms of coverage maintenance and precision. This workshop aims to leverage the power of LLMs to create a more robust adaptive and efficient anti-tracking system. We will explore the architecture of an LLM-based anti-tracking system developing the data pipeline and exploring how these models can be fine-tuned to analyze network requests page content and user interactions in real-time. The system's ability to understand the semantic context of web elements allows for more accurate identification of tracking attempts reducing false positives while improving detection rates of sophisticated trackers. A key focus will be on the practical challenges of implementing such a system within the constraints of a web browser environment. We'll discuss strategies for optimizing LLM inference to meet the real-time demands of browsing balancing accuracy with performance.
 
