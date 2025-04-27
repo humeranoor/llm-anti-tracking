@@ -55,3 +55,6 @@ pip install -r requirements.txt
 
 ## Get to know
 Hi, I'd love to know a bit more about you. Please take a minute to fill this [get-to-know form](https://forms.office.com/e/VqukvNnwmV) prior to the workshop. 
+
+## Want the step-by-step tutorial?
+Sign up [here](https://forms.office.com/e/PF9hpjsv7C).
