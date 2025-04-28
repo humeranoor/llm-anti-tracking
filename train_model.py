@@ -49,7 +49,7 @@ class URLDataset(Dataset):
 
 # Load data
 print('Reading Ground Truth Data')
-data = pd.read_csv("./data/training_data_2804.csv")
+data = pd.read_csv("./data/training_data.csv")
 print('Split into train and test')
 
 train_texts, test_texts, train_labels, test_labels = train_test_split(

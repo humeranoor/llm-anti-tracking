@@ -7,6 +7,16 @@ import seaborn as sns
 from tqdm import tqdm  # Import tqdm for progress bars
 
 
+import torch
+
+if torch.backends.mps.is_available():
+    DEVICE = "mps"
+elif torch.cuda.is_available():
+    DEVICE = "cuda"
+else:
+    DEVICE = "cpu"
+    
+
 def evaluate_model(model_path, test_data_path):
     # Load model and tokenizer
     model = AutoModelForSequenceClassification.from_pretrained(
@@ -16,13 +26,14 @@ def evaluate_model(model_path, test_data_path):
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     
     # Create classifier
-    classifier = pipeline(
+    classifier = classifier = pipeline(
         "text-classification",
         model=model,
         tokenizer=tokenizer,
-        device=-1  # Use CPU (-1) or specify GPU (0, 1, etc.)
+        device=0 if DEVICE != "cpu" else -1
     )
     
+    print(f"Model is on device: {next(model.parameters()).device}")
     # Load test data
     test_df = pd.read_csv(test_data_path)
     print(f"Loaded {len(test_df)} test samples")
@@ -126,14 +137,15 @@ def test_individual_urls():
         "./final_model",
         use_safetensors=True
     )
+    
     tokenizer = AutoTokenizer.from_pretrained("./final_model")
-    classifier = pipeline(
+    classifier = classifier = pipeline(
         "text-classification",
         model=model,
         tokenizer=tokenizer,
-        device=-1
+        device=0 if DEVICE != "cpu" else -1
     )
-    
+    print(f"Model is on device: {next(model.parameters()).device}")
     # Test URLs
     test_urls = [
         "https://cdn.shopify.com/zkesovc/vgvtp.js",  # 0
@@ -157,6 +169,6 @@ if __name__ == "__main__":
     # Run evaluation on test dataset
     metrics = evaluate_model(
         model_path="./final_model",
-        test_data_path="./data/testing_data.csv"
+        test_data_path="./data/testing_data_2804.csv"
     )
     
