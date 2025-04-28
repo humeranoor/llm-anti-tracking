@@ -1,2 +1,4 @@
 *.safetensors
 *.safetensors.*
+
+training_data_2804.csv*
