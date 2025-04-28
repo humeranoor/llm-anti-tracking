@@ -7,11 +7,21 @@ import torch
 app = Flask(__name__)
 CORS(app)  # Enable CORS to allow browser requests
 
+
+# Device selection
+if torch.backends.mps.is_available():
+    DEVICE = "mps"
+elif torch.cuda.is_available():
+    DEVICE = "cuda"
+else:
+    DEVICE = "cpu"
+    
 # Load the model and tokenizer
 MODEL_PATH = "./final_model"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
-model.eval()  # Set to evaluation mode
+model = model.to(DEVICE)  # Move model to DEVICE
+model.eval()
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -20,6 +30,7 @@ def predict():
     
     # Tokenize the URL
     inputs = tokenizer(url, return_tensors="pt", truncation=True, max_length=64)
+    inputs = {key: val.to(DEVICE) for key, val in inputs.items()}
     
     # Make prediction
     with torch.no_grad():
@@ -35,4 +46,4 @@ def predict():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5002)
