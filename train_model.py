@@ -13,11 +13,24 @@ import torch
 from torch.utils.data import Dataset
 
 # Device configuration
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+if torch.backends.mps.is_available():
+    DEVICE = "mps"
+elif torch.cuda.is_available():
+    DEVICE = "cuda"
+else:
+    DEVICE = "cpu"
+
+FP16 = True if DEVICE == "cuda" else False
+
+# Optimizer choice
+if DEVICE == "cuda":
+    OPTIMIZER = "adamw_apex_fused"
+else:
+    OPTIMIZER = "adamw_torch"
+
 MODEL_NAME = "distilbert-base-uncased"  
 MAX_LENGTH = 64
 BATCH_SIZE = 8 if DEVICE == "cpu" else 32
-FP16 = False if DEVICE == "cpu" else True
 
 class URLDataset(Dataset):
     def __init__(self, encodings, labels):
@@ -36,7 +49,7 @@ class URLDataset(Dataset):
 
 # Load data
 print('Reading Ground Truth Data')
-data = pd.read_csv("./data/training_data.csv")
+data = pd.read_csv("./data/training_data_2804.csv")
 print('Split into train and test')
 
 train_texts, test_texts, train_labels, test_labels = train_test_split(
@@ -87,12 +100,10 @@ training_args = TrainingArguments(
     eval_steps=200,
     logging_steps=50,
     fp16=FP16,
-    optim="adamw_torch" if DEVICE == "cpu" else "adamw_apex_fused",  # CPU-safe
+    optim=OPTIMIZER,        # ← Here, OPTIMIZER must be set correctly
     report_to="none",
     save_strategy="no"
 )
-
-
 
 
 
@@ -126,6 +137,7 @@ def compute_metrics(p):
         "true_positives": int(tp)
     }
 
+print(f"Model is on device: {next(model.parameters()).device}")
 
 trainer = Trainer(
     model=model,

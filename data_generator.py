@@ -275,7 +275,7 @@ def generate_dataset(n=15000, tracker_ratio=0.35):
 
 if __name__ == "__main__":
     # Generate dataset with exactly 35% trackers
-    df = generate_dataset(n=15000, tracker_ratio=0.35)
+    df = generate_dataset(n=500, tracker_ratio=0.35)
     
     # Verify the distribution
     tracker_count = df['is_tracker'].sum()
@@ -291,7 +291,7 @@ if __name__ == "__main__":
     
     # Save final dataset (already labeled according to EasyPrivacy)
     training_df = df[['url', 'is_tracker']]
-    training_df.to_csv("./data/training_data.csv", index=False)
+    training_df.to_csv("./data/training_data_2804.csv", index=False)
     
     print(f"Training dataset created with {len(training_df)} samples")
     print("Training class distribution:\n", training_df["is_tracker"].value_counts())
