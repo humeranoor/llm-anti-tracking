@@ -2,3 +2,6 @@
 *.safetensors.*
 
 training_data_2804.csv*
+testing_data_2804.csv*
+
+confusion_matrix.png
